@@ -447,3 +447,222 @@ Here, **Size**, **Living area**, and **Built-up area** are highly correlated.
 
 > "Lasso, or L1 regularization, adds the absolute value of coefficients as a penalty, which can shrink some coefficients to exactly zero. This makes it useful for automatic feature selection. Ridge, or L2 regularization, adds the squared value of coefficients, reducing their magnitude without eliminating features. It's particularly effective when features are highly correlated. Elastic Net combines both L1 and L2 penalties, giving us the benefits of feature selection from Lasso and the stability of Ridge. It's commonly used for high-dimensional datasets where there are many correlated features."
 
+---
+
+**Source:** ML Fundamentals · Conceptual Interview Question
+
+## Question
+
+5. What are different **model evaluation techniques** in machine learning? When should you use each one?
+
+## Answer
+
+Model evaluation techniques help determine **how well a machine learning model generalizes to unseen data**. The choice depends on the dataset size, model type, and problem (classification or regression).
+
+### 1. Train-Test Split
+
+The dataset is divided into:
+
+- **Training set** (e.g., 80%) to train the model.
+- **Test set** (e.g., 20%) to evaluate performance.
+
+**Example:**
+
+- 10,000 samples
+- 8,000 for training
+- 2,000 for testing
+
+![Train-test split — 80% training set and 20% test set](images/train-test-split.png)
+
+#### Advantages
+
+- Simple and fast.
+- Suitable for large datasets.
+
+#### Disadvantages
+
+- Performance depends on one random split.
+- Can be misleading if the split is not representative.
+
+### 2. K-Fold Cross-Validation
+
+The dataset is divided into **K equal parts (folds)**.
+
+For each iteration:
+
+- Train on **K−1 folds**.
+- Test on the remaining fold.
+- Repeat until every fold has been used as the test set.
+- Average the performance across all folds.
+
+Example with **5-fold CV**:
+
+```
+Fold 1 → Test
+Fold 2-5 → Train
+
+Fold 2 → Test
+Fold 1,3,4,5 → Train
+
+...
+
+Average all 5 scores
+```
+
+![5-fold cross-validation — each fold used once as the test set](images/k-fold-cross-validation.png)
+
+*Source: [scikit-learn — Visualizing cross-validation behavior](https://scikit-learn.org/stable/auto_examples/model_selection/plot_cv_indices.html)*
+
+#### Advantages
+
+- More reliable than a single train-test split.
+- Uses all data for both training and testing.
+- Reduces variance in performance estimates.
+
+#### Disadvantages
+
+- Computationally expensive.
+
+### 3. Stratified K-Fold Cross-Validation
+
+Used mainly for **classification** problems.
+
+Each fold preserves the **same class distribution** as the original dataset.
+
+Example:
+
+Original dataset:
+
+```
+90% Negative
+10% Positive
+```
+
+Each fold will also contain approximately:
+
+```
+90% Negative
+10% Positive
+```
+
+![Stratified 5-fold — each fold preserves the 90/10 class ratio](images/stratified-k-fold.png)
+
+*Source: [scikit-learn — Visualizing cross-validation behavior](https://scikit-learn.org/stable/auto_examples/model_selection/plot_cv_indices.html)*
+
+#### Why use it?
+
+Without stratification, some folds may contain very few or no minority-class samples, leading to unreliable evaluation.
+
+### 4. Leave-One-Out Cross-Validation (LOOCV)
+
+Special case of K-Fold where:
+
+$$
+K = n \text{ (number of samples)}
+$$
+
+If there are **100 samples**:
+
+- Train on 99.
+- Test on 1.
+- Repeat 100 times.
+
+![Leave-one-out CV — one sample held out per iteration](images/leave-one-out-cv.png)
+
+*Source: [scikit-learn — Visualizing cross-validation behavior](https://scikit-learn.org/stable/auto_examples/model_selection/plot_cv_indices.html)*
+
+#### Advantages
+
+- Makes maximum use of available data.
+- Good for very small datasets.
+
+#### Disadvantages
+
+- Very slow for large datasets.
+- High computational cost.
+
+### 5. Repeated K-Fold Cross-Validation
+
+Runs K-Fold multiple times using different random splits.
+
+Example:
+
+```
+5-Fold × 10 repetitions
+```
+
+Produces a more stable estimate of model performance by reducing the effect of any single random split.
+
+### 6. Time Series Cross-Validation (Rolling/Forward Validation)
+
+Used for **time-dependent data**.
+
+You **cannot randomly shuffle** time series data because it would leak future information into the past.
+
+Example:
+
+```
+Train: Jan-Feb
+Test : Mar
+
+Train: Jan-Mar
+Test : Apr
+
+Train: Jan-Apr
+Test : May
+```
+
+This respects the chronological order of observations.
+
+![Time series cross-validation — expanding training window, test always on future data](images/time-series-cross-validation.png)
+
+*Source: [scikit-learn — Visualizing cross-validation behavior](https://scikit-learn.org/stable/auto_examples/model_selection/plot_cv_indices.html)*
+
+### Common Evaluation Metrics
+
+#### Classification
+
+- **Accuracy**
+- **Precision**
+- **Recall**
+- **F1 Score**
+- **ROC-AUC**
+- **Log Loss**
+- **Confusion Matrix**
+
+#### Regression
+
+- **Mean Absolute Error (MAE)**
+- **Mean Squared Error (MSE)**
+- **Root Mean Squared Error (RMSE)**
+- **R² Score (Coefficient of Determination)**
+
+### Comparison Table
+
+
+| Technique         | Best For                  | Advantages                        | Disadvantages                         |
+| ----------------- | ------------------------- | --------------------------------- | ------------------------------------- |
+| Train-Test Split  | Large datasets            | Fast and simple                   | Performance depends on one split      |
+| K-Fold CV         | General ML                | Reliable estimate                 | More computationally expensive        |
+| Stratified K-Fold | Imbalanced classification | Preserves class distribution      | Slightly more complex                 |
+| LOOCV             | Very small datasets       | Uses almost all data for training | Extremely slow for large datasets     |
+| Repeated K-Fold   | Robust evaluation         | Reduces randomness                | Higher computation                    |
+| Time Series CV    | Time-dependent data       | Prevents data leakage             | Not suitable for non-time-series data |
+
+
+### Which One Should You Use?
+
+
+| Dataset/Scenario          | Recommended Technique        |
+| ------------------------- | ---------------------------- |
+| Large dataset             | Train-Test Split             |
+| Medium-sized dataset      | K-Fold Cross-Validation      |
+| Imbalanced classification | Stratified K-Fold            |
+| Small dataset             | LOOCV                        |
+| Time series forecasting   | Time Series Cross-Validation |
+
+
+### Interview Answer (60–90 seconds)
+
+> "Model evaluation techniques measure how well a model generalizes to unseen data. The simplest approach is a train-test split, where the data is divided into training and testing sets. A more reliable method is K-Fold Cross-Validation, where the data is split into K folds and each fold is used once for testing. For imbalanced classification problems, Stratified K-Fold ensures each fold maintains the original class distribution. For very small datasets, Leave-One-Out Cross-Validation trains on all but one sample in each iteration. For time-series data, we use forward or rolling validation to preserve the temporal order and avoid data leakage. After evaluation, we use metrics such as Accuracy, Precision, Recall, F1 Score, and ROC-AUC for classification, or MAE, RMSE, and R² for regression."
+
