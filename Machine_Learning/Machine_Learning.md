@@ -665,4 +665,343 @@ This respects the chronological order of observations.
 ### Interview Answer (60–90 seconds)
 
 > "Model evaluation techniques measure how well a model generalizes to unseen data. The simplest approach is a train-test split, where the data is divided into training and testing sets. A more reliable method is K-Fold Cross-Validation, where the data is split into K folds and each fold is used once for testing. For imbalanced classification problems, Stratified K-Fold ensures each fold maintains the original class distribution. For very small datasets, Leave-One-Out Cross-Validation trains on all but one sample in each iteration. For time-series data, we use forward or rolling validation to preserve the temporal order and avoid data leakage. After evaluation, we use metrics such as Accuracy, Precision, Recall, F1 Score, and ROC-AUC for classification, or MAE, RMSE, and R² for regression."
+---
 
+**Source:** ML Fundamentals Â· Conceptual Interview Question
+
+## Question
+
+6. Can you explain the **Confusion Matrix**? What is the difference between **Precision** and **Recall**, and how does the **F1-Score** combine these two metrics?
+
+## Answer
+
+A **Confusion Matrix** is a table used to evaluate the performance of a classification model by comparing the model's predictions with the actual outcomes.
+
+|                     |  Predicted Positive |  Predicted Negative |
+| ------------------- | ------------------: | ------------------: |
+| **Actual Positive** |  True Positive (TP) | False Negative (FN) |
+| **Actual Negative** | False Positive (FP) |  True Negative (TN) |
+
+- **True Positive (TP):** Model correctly predicts a positive case.
+- **True Negative (TN):** Model correctly predicts a negative case.
+- **False Positive (FP):** Model incorrectly predicts a positive case (Type I error).
+- **False Negative (FN):** Model incorrectly predicts a negative case (Type II error).
+
+### Precision vs Recall
+
+Although both measure classification performance, they answer different questions.
+
+#### Precision
+
+**Question answered:** *Out of all the instances predicted as positive, how many were actually positive?*
+
+$$
+\text{Precision} = \frac{TP}{TP + FP}
+$$
+
+- High precision means **few false positives**.
+- Important when the cost of a false positive is high.
+
+**Example:** Email spam detection. If a legitimate email is marked as spam, that is undesirable, so high precision is important.
+
+#### Recall
+
+**Question answered:** *Out of all the actual positive instances, how many did the model correctly identify?*
+
+$$
+\text{Recall} = \frac{TP}{TP + FN}
+$$
+
+- High recall means **few false negatives**.
+- Important when missing a positive case is costly.
+
+**Example:** Cancer detection. Missing a patient who actually has cancer is much worse than raising a few false alarms.
+
+### Precision vs Recall Summary
+
+| Precision                                          | Recall                                     |
+| -------------------------------------------------- | ------------------------------------------ |
+| Focuses on prediction quality                      | Focuses on finding all positive cases      |
+| Minimizes False Positives                          | Minimizes False Negatives                  |
+| "When I predict positive, how often am I correct?" | "Did I find most of the actual positives?" |
+
+### F1-Score
+
+The **F1-Score** combines both Precision and Recall into a single metric using their **harmonic mean**.
+
+$$
+F1 = \frac{2 \times (\text{Precision} \times \text{Recall})}{\text{Precision} + \text{Recall}}
+$$
+
+Why the **harmonic mean** instead of the average?
+
+- The harmonic mean penalizes extreme values.
+- If either Precision or Recall is low, the F1-score will also be low.
+- This ensures that a model performs well on both metrics rather than excelling in only one.
+
+**Example:**
+
+- Precision = 0.90
+- Recall = 0.50
+
+Arithmetic Mean = **0.70**
+
+F1-Score:
+
+$$
+\frac{2 \times 0.9 \times 0.5}{0.9 + 0.5} \approx 0.64
+$$
+
+The F1-score is lower because the poor recall reduces the overall performance.
+
+### Interview Takeaway (30-second answer)
+
+> "A confusion matrix summarizes a classifier's predictions into True Positives, True Negatives, False Positives, and False Negatives. Precision measures how accurate the positive predictions are, while Recall measures how many actual positive cases the model successfully identifies. Since there is often a trade-off between Precision and Recall, we use the F1-score, which is the harmonic mean of both, to provide a balanced evaluation, especially for imbalanced datasets where accuracy alone can be misleading."
+---
+
+**Source:** ML Fundamentals Â· Conceptual Interview Question
+
+## Question
+
+7. Can you explain the different types of **loss functions** used in Machine Learning? When should each one be used?
+
+## Answer
+
+A **loss function** measures how far a model's predictions are from the actual values. During training, the model tries to **minimize the loss** by updating its parameters using optimization algorithms such as Gradient Descent.
+
+The choice of loss function depends on the type of problem: **regression**, **classification**, or **specialized tasks**.
+
+### 1. Regression Loss Functions
+
+These are used when predicting **continuous numerical values**.
+
+#### a) Mean Squared Error (MSE)
+
+**Formula:**
+
+$$
+MSE = \frac{1}{N}\sum (y_{true}-y_{pred})^2
+$$
+
+**Characteristics**
+
+- Squares the error, heavily penalizing large mistakes.
+- Smooth and differentiable.
+- Sensitive to outliers.
+
+**Example**
+Predicting house prices where a $100,000 error should be penalized much more than a $10,000 error.
+
+**Used in**
+
+- Linear Regression
+- Neural Networks for regression
+
+#### b) Root Mean Squared Error (RMSE)
+
+$$
+RMSE=\sqrt{MSE}
+$$
+
+**Characteristics**
+
+- Same behavior as MSE.
+- Easier to interpret because it is in the same units as the target variable.
+
+**Example**
+Predicting temperatures or stock prices.
+
+#### c) Mean Absolute Error (MAE)
+
+$$
+MAE=\frac{1}{N}\sum |y_{true}-y_{pred}|
+$$
+
+**Characteristics**
+
+- Penalizes errors linearly.
+- More robust to outliers than MSE.
+- Less sensitive to extremely large errors.
+
+**Example**
+Predicting delivery time where occasional extreme delays should not dominate training.
+
+#### d) Huber Loss
+
+Huber Loss combines the advantages of **MSE** and **MAE**.
+
+- Uses MSE for small errors.
+- Switches to MAE for large errors.
+
+**Advantages**
+
+- Less affected by outliers.
+- Stable optimization.
+
+**Example**
+Financial forecasting with noisy data.
+
+### 2. Classification Loss Functions
+
+Used when predicting categories or classes.
+
+#### a) Binary Cross-Entropy (Log Loss)
+
+For binary classification.
+
+$$
+L=-[y\log(p)+(1-y)\log(1-p)]
+$$
+
+**Applications**
+
+- Spam detection
+- Fraud detection
+- Disease prediction
+
+**Characteristics**
+
+- Works with probabilities.
+- Strongly penalizes confident wrong predictions.
+
+#### b) Categorical Cross-Entropy
+
+Used for **multi-class classification**.
+
+Examples:
+
+- Image classification
+- Digit recognition
+- Language identification
+
+The model outputs probabilities using **Softmax**, and the loss measures how close those probabilities are to the true class.
+
+#### c) Sparse Categorical Cross-Entropy
+
+Similar to categorical cross-entropy, but labels are provided as **integer class IDs** instead of one-hot encoded vectors.
+
+Example:
+
+Instead of:
+
+```text
+[0,0,1,0]
+```
+
+Use:
+
+```text
+2
+```
+
+This is more memory-efficient for problems with many classes.
+
+### 3. Hinge Loss
+
+Used mainly in **Support Vector Machines (SVMs)**.
+
+Goal:
+
+- Maximize the margin between classes.
+- Correct predictions with a large enough margin incur zero loss.
+
+Applications:
+
+- Text classification
+- Face recognition
+- Traditional machine learning models
+
+### 4. Focal Loss
+
+Designed for **imbalanced datasets**.
+
+Problem:
+Suppose:
+
+- 99% Normal
+- 1% Fraud
+
+Regular cross-entropy focuses mostly on the easy majority class.
+
+Focal Loss:
+
+- Reduces the contribution of easy examples.
+- Gives more importance to difficult and minority-class examples.
+
+Applications:
+
+- Object detection
+- Medical diagnosis
+- Fraud detection
+
+### 5. Dice Loss
+
+Used primarily in **image segmentation**.
+
+Measures overlap between:
+
+- Predicted mask
+- Ground-truth mask
+
+Applications:
+
+- Tumor segmentation
+- Satellite imagery
+- Medical imaging
+
+### 6. Contrastive Loss
+
+Used in **metric learning**.
+
+The objective is to:
+
+- Bring similar samples closer together.
+- Push dissimilar samples farther apart.
+
+Applications:
+
+- Face verification
+- Signature verification
+- Recommendation systems
+
+### 7. Triplet Loss
+
+An extension of contrastive loss.
+
+Uses three samples:
+
+- **Anchor**
+- **Positive** (same class)
+- **Negative** (different class)
+
+Goal:
+
+- Minimize the distance between the anchor and positive.
+- Maximize the distance between the anchor and negative.
+
+Applications:
+
+- FaceNet
+- Person re-identification
+- Image retrieval
+
+### Quick Comparison
+
+| Loss Function                    | Problem Type               | Best For            | Sensitive to Outliers |
+| -------------------------------- | -------------------------- | ------------------- | --------------------- |
+| MSE                              | Regression                 | Large errors matter | Yes                   |
+| RMSE                             | Regression                 | Interpretable error | Yes                   |
+| MAE                              | Regression                 | Robust predictions  | No                    |
+| Huber                            | Regression                 | Noisy datasets      | Less                  |
+| Binary Cross-Entropy             | Binary Classification      | Two-class problems  | No                    |
+| Categorical Cross-Entropy        | Multi-class Classification | Multiple classes    | No                    |
+| Sparse Categorical Cross-Entropy | Multi-class Classification | Integer labels      | No                    |
+| Hinge Loss                       | Classification             | SVMs                | No                    |
+| Focal Loss                       | Classification             | Imbalanced datasets | No                    |
+| Dice Loss                        | Segmentation               | Pixel-level tasks   | No                    |
+| Contrastive Loss                 | Metric Learning            | Similarity learning | No                    |
+| Triplet Loss                     | Metric Learning            | Embedding learning  | No                    |
+
+### Interview Takeaway (60-second answer)
+
+> "A loss function measures how far a model's predictions are from the actual values and provides the signal used to update the model during training. For regression, common choices include MSE, RMSE, MAE, and Huber Loss. MSE penalizes large errors more heavily, while MAE is more robust to outliers. For classification, Binary Cross-Entropy is used for binary problems, and Categorical or Sparse Categorical Cross-Entropy is used for multi-class problems. Specialized losses include Hinge Loss for SVMs, Focal Loss for imbalanced datasets, Dice Loss for image segmentation, and Contrastive or Triplet Loss for learning embeddings. The choice of loss function depends on the problem type, data characteristics, and the specific behavior you want the model to optimize."
