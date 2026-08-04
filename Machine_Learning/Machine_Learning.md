@@ -1005,3 +1005,616 @@ Applications:
 ### Interview Takeaway (60-second answer)
 
 > "A loss function measures how far a model's predictions are from the actual values and provides the signal used to update the model during training. For regression, common choices include MSE, RMSE, MAE, and Huber Loss. MSE penalizes large errors more heavily, while MAE is more robust to outliers. For classification, Binary Cross-Entropy is used for binary problems, and Categorical or Sparse Categorical Cross-Entropy is used for multi-class problems. Specialized losses include Hinge Loss for SVMs, Focal Loss for imbalanced datasets, Dice Loss for image segmentation, and Contrastive or Triplet Loss for learning embeddings. The choice of loss function depends on the problem type, data characteristics, and the specific behavior you want the model to optimize."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+8. What is **multicollinearity** in machine learning, and why is it a problem?
+
+## Answer
+
+**Multicollinearity** occurs when two or more independent features are highly correlated with each other.
+
+Example:
+
+- `House size in square feet`
+- `Number of rooms`
+- `Living area`
+
+These features may carry overlapping information.
+
+### Why is it a Problem?
+
+- Coefficients become unstable in linear models.
+- It becomes difficult to interpret the effect of each feature.
+- Small changes in data can cause large changes in coefficients.
+- Standard errors increase, making statistical significance unreliable.
+
+Multicollinearity usually affects **interpretability** more than predictive accuracy.
+
+### How to Detect It
+
+- Correlation matrix
+- Variance Inflation Factor (VIF)
+- Domain knowledge
+
+### How to Handle It
+
+- Remove one of the correlated features.
+- Combine correlated features.
+- Use PCA for dimensionality reduction.
+- Use Ridge or Elastic Net regularization.
+
+### Interview Answer (30-45 seconds)
+
+> "Multicollinearity means two or more input features are highly correlated. It is a problem mainly for linear models because it makes coefficients unstable and hard to interpret. For example, house size and number of rooms may explain similar information. We can detect it using a correlation matrix or VIF and handle it by removing redundant features, combining them, using PCA, or applying Ridge or Elastic Net regularization."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+9. How do you choose the **optimal number of clusters** in clustering?
+
+## Answer
+
+The optimal number of clusters depends on both statistical measures and business understanding.
+
+### Common Methods
+
+| Method | Idea |
+| ------ | ---- |
+| **Elbow Method** | Plot WCSS/inertia against K and choose the point where improvement slows. |
+| **Silhouette Score** | Measures how well each point fits its assigned cluster compared with other clusters. |
+| **Gap Statistic** | Compares clustering quality with random data. |
+| **Davies-Bouldin Index** | Lower values usually indicate better-separated clusters. |
+| **Domain Knowledge** | Checks whether the clusters are meaningful for the use case. |
+
+### Interview Answer (30-45 seconds)
+
+> "To choose the optimal number of clusters, I usually start with the Elbow Method by plotting inertia or within-cluster sum of squares for different K values. The elbow point suggests a good tradeoff between compactness and simplicity. I also check Silhouette Score, where higher values indicate better-separated clusters. Finally, I validate whether the clusters make business sense, because clustering is unsupervised and a mathematically good K may not always be useful."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+10. How does the **sigmoid function** work in Logistic Regression, and why is Logistic Regression a classification model?
+
+## Answer
+
+The **sigmoid function** converts any real-valued number into a value between **0 and 1**.
+
+$$
+\sigma(z)=\frac{1}{1+e^{-z}}
+$$
+
+In Logistic Regression:
+
+$$
+z = w_1x_1 + w_2x_2 + ... + b
+$$
+
+The sigmoid converts this linear score into a probability.
+
+Example:
+
+- Output = 0.82 means 82% probability of class 1.
+- If threshold = 0.5, predict class 1.
+- Otherwise, predict class 0.
+
+### Why is it Not a Regression Model?
+
+Despite the name, Logistic Regression is used for **classification**, not continuous-value prediction.
+
+It is called regression because it estimates a relationship using a linear equation internally. But its final output is a probability used to classify.
+
+### Interview Answer (30-45 seconds)
+
+> "Logistic Regression first computes a linear combination of features and then passes it through the sigmoid function, which maps the value between 0 and 1. This output is interpreted as the probability of belonging to the positive class. Although it has regression in the name, it is a classification algorithm because the final decision is a class label based on a threshold, such as 0.5."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+11. What is **Gradient Descent**, and what are its main variants?
+
+## Answer
+
+**Gradient Descent** is an optimization algorithm used to minimize a loss function by updating model parameters in the direction that reduces error.
+
+Update rule:
+
+$$
+\theta = \theta - \alpha \nabla J(\theta)
+$$
+
+where:
+
+- **theta** = model parameters
+- **alpha** = learning rate
+- **gradient** = direction of steepest increase in loss
+
+### Variants
+
+| Variant | Description |
+| ------- | ----------- |
+| **Batch Gradient Descent** | Uses the entire training dataset for each update. Stable but slow for large data. |
+| **Stochastic Gradient Descent (SGD)** | Updates parameters using one sample at a time. Faster but noisy. |
+| **Mini-Batch Gradient Descent** | Uses small batches of data. Most commonly used in practice. |
+| **Momentum** | Uses past gradients to speed up learning and reduce oscillations. |
+| **Adam** | Adaptive optimizer that combines momentum and per-parameter learning rates. |
+
+### Interview Answer (45-60 seconds)
+
+> "Gradient Descent is an optimization technique that minimizes the loss function by repeatedly updating model parameters opposite to the gradient direction. Batch Gradient Descent uses the full dataset, SGD uses one sample at a time, and Mini-Batch Gradient Descent uses small batches, which is the most practical option. Advanced variants like Momentum and Adam improve convergence by using past gradients or adaptive learning rates."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+12. What is **Linear Regression**, and what are its key assumptions?
+
+## Answer
+
+**Linear Regression** is a supervised learning algorithm used to predict a continuous target variable using a linear relationship between input features and the target.
+
+Simple form:
+
+$$
+y = mx + c
+$$
+
+Multiple linear regression:
+
+$$
+y = \beta_0 + \beta_1x_1 + \beta_2x_2 + ... + \epsilon
+$$
+
+### Key Assumptions
+
+| Assumption | Meaning |
+| ---------- | ------- |
+| **Linearity** | Relationship between features and target is linear. |
+| **Independence** | Observations are independent of each other. |
+| **Homoscedasticity** | Error variance is constant across predictions. |
+| **Normality of residuals** | Residuals are approximately normally distributed. |
+| **No multicollinearity** | Independent variables should not be highly correlated. |
+
+### Interview Answer (45-60 seconds)
+
+> "Linear Regression predicts a continuous value by fitting a linear relationship between input variables and the target. It estimates coefficients that minimize prediction error, usually using least squares. Its main assumptions are linearity, independent observations, constant variance of residuals, normally distributed residuals, and low multicollinearity among independent variables."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+13. What is **hyperparameter tuning** in machine learning?
+
+## Answer
+
+**Hyperparameter tuning** is the process of finding the best values for model settings that are not learned directly from data.
+
+Examples:
+
+- Learning rate
+- Number of trees
+- Maximum tree depth
+- Number of neighbors in KNN
+- Regularization strength
+
+### Common Techniques
+
+| Technique | Description |
+| --------- | ----------- |
+| **Grid Search** | Tries all combinations from a defined set. |
+| **Random Search** | Tries random combinations, often faster than grid search. |
+| **Bayesian Optimization** | Uses previous results to choose better next trials. |
+| **Cross-Validation** | Used to estimate performance reliably during tuning. |
+
+### Interview Answer (30-45 seconds)
+
+> "Hyperparameter tuning means selecting the best external model settings, such as learning rate, tree depth, or regularization strength. These values are not learned during training, so we test different combinations using methods like Grid Search, Random Search, or Bayesian Optimization, usually with cross-validation to avoid overfitting to a single validation split."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+14. What is the **Bias-Variance tradeoff**?
+
+## Answer
+
+The **Bias-Variance tradeoff** explains the balance between underfitting and overfitting.
+
+- **Bias** is error from overly simple assumptions.
+- **Variance** is error from sensitivity to small changes in training data.
+
+### Comparison
+
+| Model Behavior | Bias | Variance |
+| -------------- | ---- | -------- |
+| Underfitting | High | Low |
+| Good fit | Balanced | Balanced |
+| Overfitting | Low | High |
+
+### Interview Answer (30-45 seconds)
+
+> "The Bias-Variance tradeoff is the balance between a model being too simple and too complex. High bias means the model underfits and misses important patterns. High variance means the model overfits and becomes too sensitive to training data. The goal is to find a model with enough flexibility to learn the signal but not so much that it memorizes noise."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+15. Explain **data leakage** in machine learning.
+
+## Answer
+
+**Data leakage** happens when information that would not be available at prediction time is used during training.
+
+### Examples
+
+- Scaling data before train-test split.
+- Using future information in time-series forecasting.
+- Including target-derived features.
+- Duplicate users appearing in both train and test sets.
+
+### Why is it Dangerous?
+
+- Validation performance looks unrealistically high.
+- The model fails in production.
+- It hides true generalization error.
+
+### How to Prevent It
+
+- Split data before preprocessing.
+- Fit scalers, imputers, and encoders only on training data.
+- Use time-based splits for time-series problems.
+- Keep user/group-level records in the same split when needed.
+
+### Interview Answer (30-45 seconds)
+
+> "Data leakage occurs when training data contains information that would not be available during real prediction. For example, fitting a scaler before splitting data or using future values in a time-series model can leak information. It leads to overly optimistic validation scores and poor production performance. We prevent it by splitting first, fitting preprocessing only on training data, and using proper validation strategies."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+16. What are **outliers**, and how do you handle them?
+
+## Answer
+
+**Outliers** are data points that are unusually far from the rest of the data.
+
+### Causes
+
+- Data entry errors
+- Measurement errors
+- Rare but valid events
+- Fraud or anomalies
+
+### Detection Methods
+
+- Boxplot and IQR method
+- Z-score
+- Scatter plots
+- Domain rules
+
+### Handling Methods
+
+- Remove them if they are errors.
+- Cap or winsorize extreme values.
+- Transform skewed features using log or Box-Cox.
+- Use robust models or metrics.
+- Keep them if they represent important real-world behavior.
+
+### Interview Answer (30-45 seconds)
+
+> "Outliers are extreme observations that differ significantly from most data points. They can come from errors or real rare events. I first verify whether they are valid using domain knowledge. If they are errors, I remove or correct them. If they are valid, I may cap them, transform the feature, or use robust methods depending on the model and business problem."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+17. How do you handle **missing values** and **duplicate values**?
+
+## Answer
+
+### Missing Values
+
+Common handling methods:
+
+- Drop rows or columns when missingness is small or the column is not useful.
+- Impute numerical values using mean, median, or model-based methods.
+- Impute categorical values using mode or a separate "Unknown" category.
+- Add missing-value indicators when missingness itself is informative.
+
+### Duplicate Values
+
+Common handling methods:
+
+- Remove exact duplicate rows.
+- Investigate duplicate IDs or repeated transactions.
+- Keep duplicates when they represent valid repeated events.
+
+### Interview Answer (45-60 seconds)
+
+> "For missing values, I first check the percentage and pattern of missingness. Numerical columns can be imputed with mean or median, categorical columns with mode or an Unknown category, and sometimes a missing indicator is useful. For duplicates, I remove exact duplicate rows if they are accidental, but I keep repeated records if they represent real events, such as multiple purchases by the same customer."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+18. What is the difference between **Feature Engineering** and **Feature Selection**?
+
+## Answer
+
+| Feature Engineering | Feature Selection |
+| ------------------- | ----------------- |
+| Creates new features or transforms existing ones. | Chooses the most useful existing features. |
+| Improves representation of data. | Reduces noise, complexity, and overfitting. |
+| Example: extracting month from date. | Example: dropping low-importance features. |
+
+### Interview Answer (30-45 seconds)
+
+> "Feature Engineering means creating or transforming features to make patterns easier for the model to learn, such as extracting day of week from a date. Feature Selection means choosing the most relevant features and removing irrelevant or redundant ones. Engineering improves feature quality, while selection reduces feature count and model complexity."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+19. What is **Feature Engineering** in machine learning?
+
+## Answer
+
+**Feature Engineering** is the process of creating, transforming, or combining input variables to improve model performance.
+
+### Examples
+
+- Extracting date parts: day, month, weekday.
+- Creating ratios: income-to-loan amount.
+- Encoding categorical variables.
+- Scaling numerical variables.
+- Binning continuous variables.
+- Text vectorization using TF-IDF or embeddings.
+
+### Interview Answer (30-45 seconds)
+
+> "Feature Engineering is the process of converting raw data into useful features that help a model learn better patterns. For example, from a date column we can extract month, day of week, or holiday indicators. Good feature engineering uses domain knowledge and often improves model performance more than changing the algorithm."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+20. What is the difference between **regularization**, **standardization**, and **normalization**?
+
+## Answer
+
+| Concept | Meaning | Example |
+| ------- | ------- | ------- |
+| **Regularization** | Penalizes model complexity to reduce overfitting. | L1, L2, Elastic Net |
+| **Standardization** | Scales data to mean 0 and standard deviation 1. | z = (x - mean) / std |
+| **Normalization** | Scales values to a fixed range, often 0 to 1. | x' = (x - min) / (max - min) |
+
+### Interview Answer (30-45 seconds)
+
+> "Regularization is a modeling technique that reduces overfitting by penalizing complex models. Standardization and normalization are preprocessing techniques. Standardization rescales features to mean zero and unit variance, while normalization usually rescales values to a fixed range like 0 to 1. So regularization controls model complexity, while standardization and normalization control feature scale."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+21. What is an **AUC-ROC Curve**?
+
+## Answer
+
+The **ROC curve** shows the tradeoff between:
+
+- **True Positive Rate (Recall)**
+- **False Positive Rate**
+
+across different classification thresholds.
+
+![AUC-ROC curve showing true positive rate versus false positive rate](images/auc-roc-curve.png)
+
+**AUC** stands for **Area Under the Curve**.
+
+### Interpretation
+
+| AUC | Meaning |
+| --- | ------- |
+| 0.5 | Random classifier |
+| 0.7-0.8 | Acceptable |
+| 0.8-0.9 | Good |
+| 0.9+ | Excellent |
+
+### Interview Answer (30-45 seconds)
+
+> "The ROC curve plots True Positive Rate against False Positive Rate at different thresholds. AUC is the area under that curve and measures how well the model separates positive and negative classes. An AUC of 0.5 means random guessing, while a value closer to 1 means better discrimination. It is useful for classification, especially when choosing thresholds."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+22. Explain the **SMOTE** method used to handle data imbalance.
+
+## Answer
+
+**SMOTE** stands for **Synthetic Minority Oversampling Technique**.
+
+It creates synthetic samples for the minority class instead of simply duplicating existing records.
+
+### How It Works
+
+1. Select a minority-class sample.
+2. Find its nearest minority-class neighbors.
+3. Create a synthetic point between the sample and one neighbor.
+
+### Important Rule
+
+Apply SMOTE **only on the training set**, not before train-test split, otherwise it can cause data leakage.
+
+### Interview Answer (30-45 seconds)
+
+> "SMOTE handles class imbalance by creating synthetic minority-class examples. It selects minority samples, finds their nearest neighbors, and generates new points between them. This gives the model more minority-class patterns without exact duplication. SMOTE should be applied only to the training data after splitting, otherwise synthetic examples can leak information into validation or test data."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+23. What are **upsampling** and **downsampling**?
+
+## Answer
+
+Upsampling and downsampling are techniques for handling imbalanced datasets.
+
+| Technique | Meaning | Risk |
+| --------- | ------- | ---- |
+| **Upsampling** | Increase minority-class samples. | Can overfit if duplicates are repeated too much. |
+| **Downsampling** | Reduce majority-class samples. | Can lose useful information. |
+
+### Interview Answer (30-45 seconds)
+
+> "Upsampling increases the minority class, either by duplicating samples or generating synthetic examples like SMOTE. Downsampling reduces the majority class by removing some examples. Upsampling can cause overfitting if we duplicate too much, while downsampling can lose information. The right choice depends on dataset size, imbalance level, and model performance."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+24. What is the difference between **Label Encoding** and **One-Hot Encoding**?
+
+## Answer
+
+| Label Encoding | One-Hot Encoding |
+| -------------- | ---------------- |
+| Converts categories into integer values. | Converts categories into binary columns. |
+| Example: Red=0, Blue=1, Green=2 | Example: `is_red`, `is_blue`, `is_green` |
+| May imply false order. | Does not imply order. |
+| Good for ordinal categories or tree models. | Good for nominal categories in linear models. |
+
+### Interview Answer (30-45 seconds)
+
+> "Label Encoding assigns each category an integer, while One-Hot Encoding creates separate binary columns for each category. Label Encoding can accidentally introduce an order, so it is better for ordinal variables or tree-based models. One-Hot Encoding is safer for nominal categories, especially with linear models, because it does not imply ranking."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+25. What is **categorical data**, and how do you handle it?
+
+## Answer
+
+**Categorical data** represents groups or labels instead of continuous numerical values.
+
+Examples:
+
+- Gender
+- City
+- Product category
+- Education level
+
+### Types
+
+- **Nominal:** No natural order, such as city or color.
+- **Ordinal:** Has order, such as low, medium, high.
+
+### Handling Methods
+
+- Label encoding for ordinal variables.
+- One-hot encoding for nominal variables.
+- Target encoding for high-cardinality categories, with cross-validation.
+- Group rare categories into "Other".
+
+### Interview Answer (30-45 seconds)
+
+> "Categorical data contains labels or groups, such as city, gender, or product category. Nominal categories have no order, while ordinal categories do. We handle them by encoding them into numerical form: one-hot encoding for nominal variables, label or ordinal encoding for ordered variables, and target encoding or rare-category grouping for high-cardinality features."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+26. What is **dimensionality reduction** in machine learning?
+
+## Answer
+
+**Dimensionality reduction** reduces the number of input features while preserving as much useful information as possible.
+
+### Why Use It?
+
+- Reduce overfitting.
+- Improve training speed.
+- Remove noise and redundancy.
+- Make visualization easier.
+
+### Common Techniques
+
+| Technique | Type | Use |
+| --------- | ---- | --- |
+| **PCA** | Linear | Compress correlated numerical features. |
+| **t-SNE** | Nonlinear | Visualize high-dimensional data. |
+| **UMAP** | Nonlinear | Fast visualization and structure discovery. |
+| **Feature Selection** | Selection-based | Keep only useful original features. |
+
+### Interview Answer (30-45 seconds)
+
+> "Dimensionality reduction means reducing the number of features while keeping the important information. It helps reduce overfitting, speed up training, remove noise, and visualize high-dimensional data. Common methods include PCA for linear compression, t-SNE and UMAP for visualization, and feature selection methods that keep only the most relevant original features."
+
+---
+
+**Source:** ML Fundamentals - Conceptual Interview Question
+
+## Question
+
+27. What are common **feature selection techniques** in machine learning?
+
+## Answer
+
+Feature selection chooses the most useful features and removes irrelevant or redundant ones.
+
+### Main Techniques
+
+| Technique | Examples |
+| --------- | -------- |
+| **Filter Methods** | Correlation, Chi-square test, ANOVA, mutual information |
+| **Wrapper Methods** | Recursive Feature Elimination, forward selection, backward elimination |
+| **Embedded Methods** | Lasso, tree-based feature importance, regularized models |
+
+### Interview Answer (45-60 seconds)
+
+> "Feature selection techniques can be grouped into filter, wrapper, and embedded methods. Filter methods use statistical tests like correlation, Chi-square, ANOVA, or mutual information before model training. Wrapper methods, such as Recursive Feature Elimination, evaluate subsets using a model but are more expensive. Embedded methods perform feature selection during training, such as Lasso or tree-based feature importance. The goal is to reduce noise, improve interpretability, and prevent overfitting."
