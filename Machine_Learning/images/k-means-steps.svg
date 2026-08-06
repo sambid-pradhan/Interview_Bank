@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320" role="img" aria-labelledby="title desc">
+  <title id="title">K-Means clustering steps</title>
+  <desc id="desc">K-Means initializes centroids, assigns points, updates centroids, and repeats until convergence.</desc>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;fill:#1f2937}
+    .panel{fill:#f8fafc;stroke:#cbd5e1}
+    .arrow{stroke:#64748b;stroke-width:3;marker-end:url(#arrow)}
+    .blue{fill:#2563eb}.red{fill:#dc2626}.green{fill:#16a34a}
+    .centroid{stroke:#111827;stroke-width:2}
+    .label{font-size:15px;font-weight:700}
+    .small{font-size:12px}
+  </style>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker></defs>
+  <rect width="900" height="320" fill="#fff"/>
+  <rect class="panel" x="20" y="45" width="190" height="220" rx="8"/>
+  <text class="label" x="115" y="30" text-anchor="middle">1. Initialize</text>
+  <circle class="blue" cx="70" cy="95" r="5"/><circle class="blue" cx="95" cy="125" r="5"/><circle class="blue" cx="65" cy="160" r="5"/>
+  <circle class="red" cx="155" cy="105" r="5"/><circle class="red" cx="145" cy="155" r="5"/><circle class="red" cx="175" cy="180" r="5"/>
+  <path class="centroid green" d="M92 202 l8 16 h-16 z"/><path class="centroid green" d="M155 72 l8 16 h-16 z"/>
+  <line class="arrow" x1="220" y1="155" x2="290" y2="155"/>
+  <rect class="panel" x="300" y="45" width="190" height="220" rx="8"/>
+  <text class="label" x="395" y="30" text-anchor="middle">2. Assign Points</text>
+  <circle class="blue" cx="350" cy="95" r="5"/><circle class="blue" cx="375" cy="125" r="5"/><circle class="blue" cx="345" cy="160" r="5"/>
+  <circle class="red" cx="435" cy="105" r="5"/><circle class="red" cx="425" cy="155" r="5"/><circle class="red" cx="455" cy="180" r="5"/>
+  <path class="centroid blue" d="M372 202 l8 16 h-16 z"/><path class="centroid red" d="M435 72 l8 16 h-16 z"/>
+  <text class="small" x="395" y="245" text-anchor="middle">nearest centroid decides cluster</text>
+  <line class="arrow" x1="500" y1="155" x2="570" y2="155"/>
+  <rect class="panel" x="580" y="45" width="290" height="220" rx="8"/>
+  <text class="label" x="725" y="30" text-anchor="middle">3. Update and Repeat</text>
+  <circle class="blue" cx="650" cy="95" r="5"/><circle class="blue" cx="675" cy="125" r="5"/><circle class="blue" cx="645" cy="160" r="5"/>
+  <circle class="red" cx="755" cy="105" r="5"/><circle class="red" cx="745" cy="155" r="5"/><circle class="red" cx="775" cy="180" r="5"/>
+  <path class="centroid blue" d="M655 122 l9 18 h-18 z"/><path class="centroid red" d="M758 142 l9 18 h-18 z"/>
+  <text class="small" x="725" y="245" text-anchor="middle">move centroids to cluster means until stable</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="360" viewBox="0 0 820 360" role="img" aria-labelledby="title desc">
+  <title id="title">Silhouette score intuition</title>
+  <desc id="desc">A point's silhouette compares distance to its own cluster with distance to the nearest other cluster.</desc>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;fill:#1f2937}
+    .blue{fill:#dbeafe;stroke:#2563eb;stroke-width:2}
+    .red{fill:#fee2e2;stroke:#dc2626;stroke-width:2}
+    .point{fill:#111827}
+    .lineA{stroke:#2563eb;stroke-width:3}
+    .lineB{stroke:#dc2626;stroke-width:3;stroke-dasharray:8 6}
+    .label{font-size:16px;font-weight:700}
+    .small{font-size:13px}
+  </style>
+  <rect width="820" height="360" fill="#fff"/>
+  <ellipse class="blue" cx="230" cy="185" rx="150" ry="95"/>
+  <ellipse class="red" cx="610" cy="185" rx="145" ry="95"/>
+  <text class="label" x="230" y="65" text-anchor="middle">Own cluster</text>
+  <text class="label" x="610" y="65" text-anchor="middle">Nearest other cluster</text>
+  <circle class="point" cx="230" cy="185" r="7"/>
+  <circle class="point" cx="180" cy="155" r="5"/><circle class="point" cx="260" cy="135" r="5"/><circle class="point" cx="290" cy="205" r="5"/><circle class="point" cx="185" cy="230" r="5"/>
+  <circle class="point" cx="570" cy="145" r="5"/><circle class="point" cx="635" cy="165" r="5"/><circle class="point" cx="665" cy="220" r="5"/><circle class="point" cx="565" cy="235" r="5"/>
+  <line class="lineA" x1="230" y1="185" x2="180" y2="155"/>
+  <line class="lineA" x1="230" y1="185" x2="260" y2="135"/>
+  <line class="lineB" x1="230" y1="185" x2="570" y2="145"/>
+  <text class="label" x="165" y="125">a</text>
+  <text class="small" x="80" y="145">average distance to own cluster</text>
+  <text class="label" x="395" y="142">b</text>
+  <text class="small" x="350" y="120">distance to nearest other cluster</text>
+  <text class="label" x="410" y="315" text-anchor="middle">Good silhouette: a is small and b is large</text>
+</svg>

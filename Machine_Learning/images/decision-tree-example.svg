@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="360" viewBox="0 0 820 360" role="img" aria-labelledby="title desc">
+  <title id="title">Decision tree split example</title>
+  <desc id="desc">A decision tree with root split, two child splits, and leaf predictions.</desc>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;fill:#1f2937}
+    .node{fill:#eef6ff;stroke:#2563eb;stroke-width:2}
+    .leaf{fill:#f0fdf4;stroke:#16a34a;stroke-width:2}
+    .line{stroke:#64748b;stroke-width:2}
+    .label{font-size:15px;font-weight:700}
+    .small{font-size:13px}
+  </style>
+  <rect width="820" height="360" fill="#ffffff"/>
+  <rect class="node" x="310" y="25" width="200" height="58" rx="8"/>
+  <text class="label" x="410" y="52" text-anchor="middle">Income &gt; 50K?</text>
+  <text class="small" x="410" y="70" text-anchor="middle">choose best split</text>
+  <line class="line" x1="355" y1="83" x2="205" y2="145"/>
+  <line class="line" x1="465" y1="83" x2="615" y2="145"/>
+  <text class="small" x="250" y="123">No</text>
+  <text class="small" x="565" y="123">Yes</text>
+  <rect class="node" x="105" y="145" width="200" height="58" rx="8"/>
+  <text class="label" x="205" y="172" text-anchor="middle">Age &lt;= 30?</text>
+  <text class="small" x="205" y="190" text-anchor="middle">split again</text>
+  <rect class="node" x="515" y="145" width="200" height="58" rx="8"/>
+  <text class="label" x="615" y="172" text-anchor="middle">Debt &lt; 20K?</text>
+  <text class="small" x="615" y="190" text-anchor="middle">split again</text>
+  <line class="line" x1="155" y1="203" x2="90" y2="265"/>
+  <line class="line" x1="255" y1="203" x2="320" y2="265"/>
+  <line class="line" x1="565" y1="203" x2="500" y2="265"/>
+  <line class="line" x1="665" y1="203" x2="730" y2="265"/>
+  <rect class="leaf" x="25" y="265" width="130" height="55" rx="8"/>
+  <text class="label" x="90" y="297" text-anchor="middle">Class: No</text>
+  <rect class="leaf" x="255" y="265" width="130" height="55" rx="8"/>
+  <text class="label" x="320" y="297" text-anchor="middle">Class: Yes</text>
+  <rect class="leaf" x="435" y="265" width="130" height="55" rx="8"/>
+  <text class="label" x="500" y="297" text-anchor="middle">Class: No</text>
+  <rect class="leaf" x="665" y="265" width="130" height="55" rx="8"/>
+  <text class="label" x="730" y="297" text-anchor="middle">Class: Yes</text>
+</svg>
