@@ -1594,7 +1594,11 @@ Feature selection chooses the most useful features and removes irrelevant or red
 
 ---
 
-### 18. What is dimensionality reduction? Why is it needed, and what are some common techniques?
+## Question
+
+18. What is dimensionality reduction? Why is it needed, and what are some common techniques?
+
+## Answer
 
 Dimensionality reduction reduces the number of input features while keeping the most useful information.
 
@@ -1604,7 +1608,13 @@ Common techniques include PCA, t-SNE, UMAP, autoencoders, and feature selection 
 
 **Interview Answer:** "Dimensionality reduction means reducing the number of features while preserving important information. It helps with faster training, less overfitting, noise reduction, and visualization. PCA is commonly used for linear dimensionality reduction, while t-SNE and UMAP are often used for visualizing high-dimensional data."
 
-### 19. How do you handle categorical variables in a machine learning dataset?
+---
+
+## Question
+
+19. How do you handle categorical variables in a machine learning dataset?
+
+## Answer
 
 Categorical variables must be converted into numerical form before most ML algorithms can use them.
 
@@ -1617,7 +1627,13 @@ Common methods:
 
 **Interview Answer:** "I first identify whether the categorical feature is nominal or ordinal. For ordinal variables, I use ordinal encoding. For nominal variables, one-hot encoding is usually safer. For high-cardinality features, I may use target encoding or group rare categories, but I apply it carefully within cross-validation to avoid data leakage."
 
-### 20. What is the difference between Label Encoding and One-Hot Encoding? When would you use each?
+---
+
+## Question
+
+20. What is the difference between Label Encoding and One-Hot Encoding? When would you use each?
+
+## Answer
 
 | Label Encoding | One-Hot Encoding |
 | -------------- | ---------------- |
@@ -1627,7 +1643,13 @@ Common methods:
 
 **Interview Answer:** "Label Encoding assigns integer values to categories, so it can create a false order if the categories are nominal. One-Hot Encoding creates separate binary columns and avoids that issue. I use label or ordinal encoding for ordered categories, and one-hot encoding for unordered categories like city, color, or product type."
 
-### 21. How do you handle an imbalanced dataset? Explain upsampling and downsampling.
+---
+
+## Question
+
+21. How do you handle an imbalanced dataset? Explain upsampling and downsampling.
+
+## Answer
 
 An imbalanced dataset has one class much more frequent than another.
 
@@ -1643,7 +1665,13 @@ Common approaches:
 
 **Interview Answer:** "For imbalanced data, accuracy can be misleading, so I use metrics like recall, precision, F1-score, or PR-AUC. I can upsample the minority class, downsample the majority class, use class weights, or apply SMOTE. Upsampling may overfit if duplicates are repeated too much, while downsampling can lose useful information."
 
-### 22. What is SMOTE? How does it work, and what are its advantages and disadvantages?
+---
+
+## Question
+
+22. What is SMOTE? How does it work, and what are its advantages and disadvantages?
+
+## Answer
 
 SMOTE stands for **Synthetic Minority Oversampling Technique**.
 
@@ -1662,7 +1690,13 @@ Disadvantages:
 
 **Interview Answer:** "SMOTE creates synthetic minority-class examples by taking a minority sample, finding its nearest minority neighbors, and generating new points between them. It is better than simple duplication, but it can introduce noise and should only be applied after the train-test split, on the training data."
 
-### 23. How do you handle missing values and duplicate records during data preprocessing?
+---
+
+## Question
+
+23. How do you handle missing values and duplicate records during data preprocessing?
+
+## Answer
 
 For missing values:
 
@@ -1679,7 +1713,13 @@ For duplicates:
 
 **Interview Answer:** "I first check the amount and pattern of missingness. Numerical columns can be imputed with mean or median, categorical columns with mode or Unknown, and sometimes a missing indicator is useful. For duplicates, I remove accidental exact duplicates but keep repeated records if they represent valid events."
 
-### 24. What are outliers? How do you detect and handle them?
+---
+
+## Question
+
+24. What are outliers? How do you detect and handle them?
+
+## Answer
 
 Outliers are observations that are unusually far from the rest of the data.
 
@@ -1700,7 +1740,13 @@ Handling methods:
 
 **Interview Answer:** "Outliers are extreme data points that differ significantly from the majority. I detect them using IQR, z-score, plots, or domain rules. I do not remove them blindly; if they are errors, I correct or remove them, but if they are valid rare cases, I may cap them, transform the feature, or use robust models."
 
-### 25. What is data leakage? Can you give an example and explain how to prevent it?
+---
+
+## Question
+
+25. What is data leakage? Can you give an example and explain how to prevent it?
+
+## Answer
 
 Data leakage happens when information unavailable at prediction time is used during model training.
 
@@ -1720,7 +1766,13 @@ Prevention:
 
 **Interview Answer:** "Data leakage occurs when the model learns from information that would not be available in production. For example, fitting a scaler before splitting the dataset leaks test-set statistics into training. To prevent it, I split first, fit preprocessing only on the training set, and use proper validation strategies such as time-based or group-based splits."
 
-### 26. What is a hypothesis in machine learning? What is the hypothesis space?
+---
+
+## Question
+
+26. What is a hypothesis in machine learning? What is the hypothesis space?
+
+## Answer
 
 A **hypothesis** is a candidate function or model that maps inputs to outputs.
 
@@ -1730,7 +1782,13 @@ Example: In linear regression, each possible line or hyperplane is a hypothesis,
 
 **Interview Answer:** "A hypothesis is the model's proposed mapping from inputs to outputs. The hypothesis space is the collection of all possible mappings the algorithm can learn. Training searches this space to find the hypothesis that best fits the data according to the loss function."
 
-### 27. Explain the bias-variance tradeoff. How do underfitting and overfitting relate to it?
+---
+
+## Question
+
+27. Explain the bias-variance tradeoff. How do underfitting and overfitting relate to it?
+
+## Answer
 
 Bias is error from overly simple assumptions. Variance is error from being too sensitive to the training data.
 
@@ -1742,7 +1800,13 @@ Bias is error from overly simple assumptions. Variance is error from being too s
 
 **Interview Answer:** "The bias-variance tradeoff is the balance between a model being too simple and too complex. High bias causes underfitting because the model cannot capture patterns. High variance causes overfitting because the model learns noise from the training data. The goal is to find a model that generalizes well."
 
-### 28. Explain Linear Regression. How does it work?
+---
+
+## Question
+
+28. Explain Linear Regression. How does it work?
+
+## Answer
 
 Linear Regression predicts a continuous target by fitting a linear relationship between input features and the output.
 
@@ -1750,7 +1814,13 @@ It learns coefficients that minimize prediction error, commonly using least squa
 
 **Interview Answer:** "Linear Regression models the target as a weighted sum of input features. It learns the best coefficients by minimizing the difference between predicted and actual values, usually using mean squared error. It is simple, interpretable, and useful when the relationship is roughly linear."
 
-### 29. What are the assumptions of Linear Regression?
+---
+
+## Question
+
+29. What are the assumptions of Linear Regression?
+
+## Answer
 
 Main assumptions:
 
@@ -1762,7 +1832,13 @@ Main assumptions:
 
 **Interview Answer:** "Linear Regression assumes linearity, independent observations, constant variance of residuals, normally distributed residuals, and low multicollinearity. If these assumptions are badly violated, the model may produce unreliable coefficients or poor predictions."
 
-### 30. What is Gradient Descent? Explain Batch, Stochastic, and Mini-Batch Gradient Descent.
+---
+
+## Question
+
+30. What is Gradient Descent? Explain Batch, Stochastic, and Mini-Batch Gradient Descent.
+
+## Answer
 
 Gradient Descent is an optimization algorithm that updates model parameters in the direction that reduces the loss.
 
@@ -1774,7 +1850,13 @@ Gradient Descent is an optimization algorithm that updates model parameters in t
 
 **Interview Answer:** "Gradient Descent minimizes the loss by updating parameters opposite to the gradient direction. Batch Gradient Descent is stable but slow because it uses all data per update. SGD is faster but noisy because it uses one sample. Mini-Batch Gradient Descent is the most common practical choice because it balances speed and stability."
 
-### 31. What is the difference between Linear Regression and Logistic Regression?
+---
+
+## Question
+
+31. What is the difference between Linear Regression and Logistic Regression?
+
+## Answer
 
 | Linear Regression | Logistic Regression |
 | ----------------- | ------------------- |
@@ -1785,7 +1867,13 @@ Gradient Descent is an optimization algorithm that updates model parameters in t
 
 **Interview Answer:** "Linear Regression predicts continuous values, while Logistic Regression predicts probabilities for classification. Logistic Regression applies the sigmoid function to a linear equation, so the output lies between 0 and 1. The final class is decided using a threshold."
 
-### 32. Explain Logistic Regression. Why is it called regression even though it performs classification?
+---
+
+## Question
+
+32. Explain Logistic Regression. Why is it called regression even though it performs classification?
+
+## Answer
 
 Logistic Regression is a classification algorithm that estimates the probability of a class.
 
@@ -1795,7 +1883,13 @@ It is called regression because it models a relationship using a linear equation
 
 **Interview Answer:** "Logistic Regression computes a linear combination of features and passes it through the sigmoid function to produce a probability. It is used for classification because we convert that probability into a class using a threshold. It is called regression because the underlying model estimates a relationship between features and the log-odds of the class."
 
-### 33. What is the Sigmoid Function? Why is it used in Logistic Regression?
+---
+
+## Question
+
+33. What is the Sigmoid Function? Why is it used in Logistic Regression?
+
+## Answer
 
 The sigmoid function maps any real number to a value between 0 and 1.
 
@@ -1807,7 +1901,13 @@ It is used in Logistic Regression because its output can be interpreted as a pro
 
 **Interview Answer:** "The sigmoid function converts any real-valued score into a value between 0 and 1. Logistic Regression uses it to transform a linear output into a class probability. If the probability is above a threshold, such as 0.5, we predict the positive class."
 
-### 34. How does a Decision Tree work?
+---
+
+## Question
+
+34. How does a Decision Tree work?
+
+## Answer
 
 A Decision Tree splits data into smaller groups based on feature values.
 
@@ -1815,7 +1915,13 @@ At each node, it chooses the split that best separates the target classes or red
 
 **Interview Answer:** "A Decision Tree works by asking a sequence of feature-based questions. Each split divides the data into more homogeneous groups. For classification, it may use Gini Index or Entropy; for regression, it may reduce variance or squared error. The prediction comes from the final leaf node."
 
-### 35. What are Entropy and Information Gain? How are they used while building a Decision Tree?
+---
+
+## Question
+
+35. What are Entropy and Information Gain? How are they used while building a Decision Tree?
+
+## Answer
 
 Entropy measures impurity or disorder in a dataset. Information Gain measures how much entropy is reduced after a split.
 
@@ -1823,7 +1929,13 @@ A Decision Tree chooses splits that maximize Information Gain.
 
 **Interview Answer:** "Entropy measures how mixed the classes are. If a node contains mostly one class, entropy is low; if classes are evenly mixed, entropy is high. Information Gain is the reduction in entropy after splitting. Decision Trees use it to choose the feature that best separates the data."
 
-### 36. What is the Gini Index? How is it different from Entropy?
+---
+
+## Question
+
+36. What is the Gini Index? How is it different from Entropy?
+
+## Answer
 
 Gini Index measures the probability of incorrectly classifying a randomly chosen sample if labeled according to class distribution.
 
@@ -1835,7 +1947,13 @@ Gini Index measures the probability of incorrectly classifying a randomly chosen
 
 **Interview Answer:** "Both Gini Index and Entropy measure node impurity. Gini is computationally simpler and measures misclassification impurity, while Entropy measures disorder using logarithms. In practice, they often produce similar trees."
 
-### 37. What is pruning in Decision Trees? Why is it important?
+---
+
+## Question
+
+37. What is pruning in Decision Trees? Why is it important?
+
+## Answer
 
 Pruning removes branches that do not improve generalization.
 
@@ -1843,7 +1961,13 @@ It is important because fully grown trees can overfit training data.
 
 **Interview Answer:** "Pruning reduces the size of a Decision Tree by removing branches that capture noise rather than useful patterns. It helps prevent overfitting, improves generalization, and makes the tree easier to interpret."
 
-### 38. What is the difference between a Decision Tree and a Random Forest?
+---
+
+## Question
+
+38. What is the difference between a Decision Tree and a Random Forest?
+
+## Answer
 
 | Decision Tree | Random Forest |
 | ------------- | ------------- |
@@ -1854,7 +1978,13 @@ It is important because fully grown trees can overfit training data.
 
 **Interview Answer:** "A Decision Tree is a single model that makes splits based on features. A Random Forest builds many Decision Trees using bootstrapped data and random feature subsets, then combines their predictions. This reduces variance and usually performs better than a single tree."
 
-### 39. Explain Naive Bayes. What is Bayes' Theorem, and why is the algorithm called "naive"?
+---
+
+## Question
+
+39. Explain Naive Bayes. What is Bayes' Theorem, and why is the algorithm called "naive"?
+
+## Answer
 
 Naive Bayes is a probabilistic classifier based on Bayes' Theorem.
 
@@ -1868,7 +1998,13 @@ It is called "naive" because it assumes features are conditionally independent g
 
 **Interview Answer:** "Naive Bayes uses Bayes' Theorem to calculate the probability of each class given the input features. It is called naive because it assumes all features are independent of each other given the class, which is often not fully true but works surprisingly well, especially for text classification."
 
-### 40. What is a Support Vector Machine (SVM)? How does it classify data?
+---
+
+## Question
+
+40. What is a Support Vector Machine (SVM)? How does it classify data?
+
+## Answer
 
 SVM is a supervised learning algorithm that finds the best decision boundary, or hyperplane, between classes.
 
@@ -1876,7 +2012,13 @@ It chooses the boundary with the maximum margin from the nearest points, called 
 
 **Interview Answer:** "An SVM classifies data by finding the hyperplane that best separates classes with the maximum margin. The closest data points to the boundary are called support vectors, and they determine the position of the hyperplane."
 
-### 41. What is the Kernel Trick? Why is it useful?
+---
+
+## Question
+
+41. What is the Kernel Trick? Why is it useful?
+
+## Answer
 
 The Kernel Trick allows SVMs to learn nonlinear decision boundaries without explicitly transforming data into a higher-dimensional space.
 
@@ -1884,7 +2026,13 @@ Common kernels include linear, polynomial, and RBF.
 
 **Interview Answer:** "The Kernel Trick lets an SVM handle nonlinear patterns by computing similarity in a higher-dimensional feature space without explicitly creating those dimensions. This makes nonlinear classification efficient. Common kernels include polynomial and RBF."
 
-### 42. What is the difference between Hard Margin and Soft Margin SVM?
+---
+
+## Question
+
+42. What is the difference between Hard Margin and Soft Margin SVM?
+
+## Answer
 
 | Hard Margin SVM | Soft Margin SVM |
 | ---------------- | --------------- |
@@ -1894,7 +2042,13 @@ Common kernels include linear, polynomial, and RBF.
 
 **Interview Answer:** "Hard Margin SVM requires perfect separation and does not allow classification errors, so it is sensitive to outliers. Soft Margin SVM allows some errors to get a better general boundary. In practice, Soft Margin is more commonly used because real data is usually noisy."
 
-### 43. What is Bagging? How does it improve model performance?
+---
+
+## Question
+
+43. What is Bagging? How does it improve model performance?
+
+## Answer
 
 Bagging, or Bootstrap Aggregating, trains multiple models on different bootstrapped samples and combines their predictions.
 
@@ -1902,7 +2056,13 @@ It improves performance by reducing variance.
 
 **Interview Answer:** "Bagging trains multiple models on different random samples of the training data and averages or votes their predictions. It reduces variance and helps prevent overfitting, especially for unstable models like Decision Trees."
 
-### 44. What is Boosting? How does it work?
+---
+
+## Question
+
+44. What is Boosting? How does it work?
+
+## Answer
 
 Boosting builds models sequentially, where each new model focuses on the errors made by previous models.
 
@@ -1910,7 +2070,13 @@ It often reduces bias and improves predictive performance.
 
 **Interview Answer:** "Boosting trains weak learners one after another. Each new learner focuses more on the examples the previous learners got wrong. The final prediction combines all learners, usually with weights. Algorithms like AdaBoost, Gradient Boosting, XGBoost, and LightGBM use this idea."
 
-### 45. What is the difference between Bagging and Boosting?
+---
+
+## Question
+
+45. What is the difference between Bagging and Boosting?
+
+## Answer
 
 | Bagging | Boosting |
 | ------- | -------- |
@@ -1921,7 +2087,13 @@ It often reduces bias and improves predictive performance.
 
 **Interview Answer:** "Bagging trains multiple models independently on bootstrapped samples and combines them, mainly reducing variance. Boosting trains models sequentially, with each model correcting previous errors, mainly reducing bias. Random Forest is a bagging method, while XGBoost is a boosting method."
 
-### 46. Explain Random Forest. Why does it perform better than a single Decision Tree?
+---
+
+## Question
+
+46. Explain Random Forest. Why does it perform better than a single Decision Tree?
+
+## Answer
 
 Random Forest is an ensemble of Decision Trees trained on bootstrapped samples and random subsets of features.
 
@@ -1929,7 +2101,13 @@ It performs better because averaging many trees reduces variance and overfitting
 
 **Interview Answer:** "Random Forest builds many Decision Trees using different samples and feature subsets, then combines their predictions. This makes it more stable and less likely to overfit than a single Decision Tree. It usually performs well with little preprocessing and can also provide feature importance."
 
-### 47. How is Feature Importance calculated in a Random Forest?
+---
+
+## Question
+
+47. How is Feature Importance calculated in a Random Forest?
+
+## Answer
 
 Common methods:
 
@@ -1938,7 +2116,13 @@ Common methods:
 
 **Interview Answer:** "Random Forest feature importance is often calculated by measuring how much each feature reduces impurity across all trees. Another reliable method is permutation importance, where we shuffle one feature and measure how much model performance drops. A larger drop means the feature is more important."
 
-### 48. What is the difference between Random Forest and Gradient Boosting?
+---
+
+## Question
+
+48. What is the difference between Random Forest and Gradient Boosting?
+
+## Answer
 
 | Random Forest | Gradient Boosting |
 | ------------- | ----------------- |
@@ -1949,7 +2133,13 @@ Common methods:
 
 **Interview Answer:** "Random Forest trains many trees independently and averages them, which reduces variance. Gradient Boosting trains trees sequentially, where each tree corrects the errors of the previous trees. Gradient Boosting can be more accurate but is usually more sensitive to hyperparameters."
 
-### 49. What is XGBoost? Why is it widely used in machine learning competitions and production systems?
+---
+
+## Question
+
+49. What is XGBoost? Why is it widely used in machine learning competitions and production systems?
+
+## Answer
 
 XGBoost is an optimized gradient boosting library designed for speed, accuracy, and regularization.
 
@@ -1965,8 +2155,13 @@ Key strengths:
 
 **Interview Answer:** "XGBoost is an efficient implementation of gradient boosted decision trees. It is widely used because it is fast, regularized, handles missing values, supports parallel computation, and performs extremely well on structured data. It became popular in competitions because it often gives strong results with good tuning."
 
+---
 
-### 50. What is clustering? Where is it used?
+## Question
+
+50. What is clustering? Where is it used?
+
+## Answer
 
 Clustering is an unsupervised learning technique that groups similar data points together without predefined labels.
 
@@ -1974,7 +2169,13 @@ Applications include customer segmentation, document grouping, image segmentatio
 
 **Interview Answer:** "Clustering is used to find natural groups in unlabeled data. The goal is to place similar points in the same cluster and dissimilar points in different clusters. It is commonly used for customer segmentation, image segmentation, recommendation systems, and anomaly detection."
 
-### 51. What is the difference between Supervised and Unsupervised Learning?
+---
+
+## Question
+
+51. What is the difference between Supervised and Unsupervised Learning?
+
+## Answer
 
 | Supervised Learning | Unsupervised Learning |
 | ------------------- | --------------------- |
@@ -1984,7 +2185,13 @@ Applications include customer segmentation, document grouping, image segmentatio
 
 **Interview Answer:** "Supervised learning uses labeled data, where the target output is known. It is used for tasks like classification and regression. Unsupervised learning uses unlabeled data and tries to discover patterns, groups, or structure, such as clustering customers based on behavior."
 
-### 52. Explain the K-Means Clustering algorithm.
+---
+
+## Question
+
+52. Explain the K-Means Clustering algorithm.
+
+## Answer
 
 K-Means partitions data into K clusters by minimizing the distance between points and their assigned cluster centroid.
 
@@ -1997,7 +2204,13 @@ Steps:
 
 **Interview Answer:** "K-Means is an unsupervised clustering algorithm. We choose K, initialize K centroids, assign each point to the nearest centroid, update each centroid as the mean of its assigned points, and repeat until convergence. The objective is to minimize within-cluster variance."
 
-### 53. How do you choose the optimal value of K in K-Means?
+---
+
+## Question
+
+53. How do you choose the optimal value of K in K-Means?
+
+## Answer
 
 Common approaches:
 
@@ -2008,7 +2221,13 @@ Common approaches:
 
 **Interview Answer:** "I usually try multiple K values and evaluate them using the Elbow Method and Silhouette Score. The Elbow Method looks for the point where adding more clusters gives diminishing returns. Silhouette Score checks how well-separated the clusters are. I also validate whether the clusters make business sense."
 
-### 54. What is the Elbow Method? What are its limitations?
+---
+
+## Question
+
+54. What is the Elbow Method? What are its limitations?
+
+## Answer
 
 The Elbow Method plots within-cluster sum of squares, or inertia, for different K values.
 
@@ -2022,7 +2241,13 @@ Limitations:
 
 **Interview Answer:** "The Elbow Method plots inertia against different K values. As K increases, inertia decreases, but after a point the improvement becomes small. That point is called the elbow. Its limitation is that the elbow is sometimes ambiguous, so I usually combine it with Silhouette Score and domain knowledge."
 
-### 55. What is the Silhouette Score? How do you interpret it?
+---
+
+## Question
+
+55. What is the Silhouette Score? How do you interpret it?
+
+## Answer
 
 Silhouette Score measures how similar a point is to its own cluster compared with other clusters.
 
@@ -2034,7 +2259,13 @@ Range:
 
 **Interview Answer:** "Silhouette Score measures both cluster cohesion and separation. A score close to 1 means points are well matched to their own cluster and far from other clusters. A score near 0 means clusters overlap, and a negative score suggests some points may be assigned to the wrong cluster."
 
-### 56. What is the difference between K-Means and Hierarchical Clustering?
+---
+
+## Question
+
+56. What is the difference between K-Means and Hierarchical Clustering?
+
+## Answer
 
 | K-Means | Hierarchical Clustering |
 | ------- | ----------------------- |
@@ -2045,7 +2276,13 @@ Range:
 
 **Interview Answer:** "K-Means requires the number of clusters upfront and produces flat clusters based on centroids. Hierarchical Clustering builds a tree-like structure called a dendrogram, which shows clusters at different levels. K-Means is usually faster, while Hierarchical Clustering is useful when we want to understand nested relationships."
 
-### 57. What are the limitations of K-Means?
+---
+
+## Question
+
+57. What are the limitations of K-Means?
+
+## Answer
 
 Limitations:
 
@@ -2058,7 +2295,13 @@ Limitations:
 
 **Interview Answer:** "K-Means is simple and fast, but it has limitations. We must choose K, it is sensitive to initialization and outliers, and it works best when clusters are roughly spherical and similar in size. It also depends heavily on feature scaling because it uses distance."
 
-### 58. What are some real-world applications of K-Means Clustering?
+---
+
+## Question
+
+58. What are some real-world applications of K-Means Clustering?
+
+## Answer
 
 Applications:
 
@@ -2071,7 +2314,13 @@ Applications:
 
 **Interview Answer:** "K-Means is often used for customer segmentation, document grouping, image compression, market segmentation, and anomaly detection. For example, a company can cluster customers based on purchase behavior and create targeted marketing campaigns for each group."
 
-### 59. When does the K-Means algorithm converge?
+---
+
+## Question
+
+59. When does the K-Means algorithm converge?
+
+## Answer
 
 K-Means converges when cluster assignments stop changing, centroids stop moving significantly, or the maximum number of iterations is reached.
 
@@ -2079,7 +2328,13 @@ The objective function decreases at each iteration, so it converges to a local o
 
 **Interview Answer:** "K-Means converges when the centroids no longer change significantly or when data point assignments remain the same between iterations. It can also stop after a maximum number of iterations. It usually converges to a local optimum, so initialization matters."
 
-### 60. What are some advanced or improved versions of K-Means, and when would you use them?
+---
+
+## Question
+
+60. What are some advanced or improved versions of K-Means, and when would you use them?
+
+## Answer
 
 Common improved versions:
 
@@ -2090,3 +2345,5 @@ Common improved versions:
 - **Fuzzy C-Means:** Allows soft cluster membership.
 
 **Interview Answer:** "K-Means++ improves centroid initialization and is usually preferred over random initialization. Mini-Batch K-Means is useful for large datasets because it trains faster using small batches. Bisecting K-Means recursively splits clusters and can be useful when we want a more hierarchical clustering approach. Other variants like Kernel K-Means and Fuzzy C-Means are used when clusters are nonlinear or membership is not strictly one cluster per point."
+
+
