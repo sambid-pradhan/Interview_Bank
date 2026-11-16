@@ -12,6 +12,7 @@ A personal knowledge base for interview preparation, coding practice, ML/statist
 | [Machine Learning](Machine_Learning/Machine_Learning.md) | ML fundamentals, model evaluation, regularization, validation, metrics, and practical ML concepts |
 | [GenAI](GenAI/) | LLMs, RAG, agents, prompt engineering, embeddings, and generative AI interview topics |
 | [System_Design](System_Design/) | Architecture, scalability, databases, APIs, caching, reliability, and design trade-offs |
+| [Docker](Docker_Kubernetes/Docker_Kubernetes.md) | Containers, images, Dockerfiles, networking, storage, and Docker Compose interview topics |
 
 Each topic folder can maintain its own index of questions and answers. Keep this global README focused on navigation and study workflow.
 
